@@ -18,26 +18,28 @@ var showElement = function (element) {
 };
 
 var getRandomValue = function (arr) {
-  if (arr) {
-    var randomValue = arr[Math.round(-0.5 + Math.random() * arr.length)];
+  if (arr.length > 0) {
+    return arr[Math.round(-0.5 + Math.random() * arr.length)];
   }
 
-  return randomValue;
+  return 0;
 };
 
 var getRandomName = function (fullNames) {
-  if (fullNames) {
+  if (fullNames.length > 0) {
     var firstArr = getRandomValue(fullNames);
     var secondArr = firstArr === fullNames[0] ? fullNames[1] : fullNames[0];
     var firstName = getRandomValue(firstArr);
     var secondName = getRandomValue(secondArr);
+
+    return firstName + ' ' + secondName;
   }
 
-  return firstName + ' ' + secondName;
+  return '';
 };
 
 var generateWizardsArray = function (namesArr, coatColorsArr, eyesColorsArr, count) {
-  if (namesArr && coatColorsArr && eyesColorsArr && count) {
+  if (namesArr.length > 0 && coatColorsArr.length > 0 && eyesColorsArr.length > 0 && count) {
     for (var i = 0; i < count; i++) {
       wizards[i] = {
         name: getRandomName(namesArr),
@@ -51,7 +53,7 @@ var generateWizardsArray = function (namesArr, coatColorsArr, eyesColorsArr, cou
 };
 
 var renderWizard = function (wizard) {
-  if (wizard) {
+  if (Object.keys(wizard).length > 0) {
     var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -60,21 +62,25 @@ var renderWizard = function (wizard) {
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+    return wizardElement;
   }
 
-  return wizardElement;
+  return {};
 };
 
 var addWizardElements = function (wizardsArr) {
-  if (wizardsArr) {
+  if (wizardsArr.length > 0) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < wizardsArr.length; i++) {
       fragment.appendChild(renderWizard(wizardsArr[i]));
     }
+
+    return fragment;
   }
 
-  return fragment;
+  return {};
 };
 
 showElement(userDialog);

@@ -1,5 +1,7 @@
 'use strict';
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 var WIZARDS_COUNT = 4;
 var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -8,12 +10,28 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var userDialog = document.querySelector('.setup');
+var userDialogOpen = document.querySelector('.setup-open');
+var userDialogClose = userDialog.querySelector('.setup-close');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
+var userNameInput = userDialog.querySelector('.setup-user-name');
 var wizards = [];
+
 
 var showElement = function (element) {
   if (element) {
     element.classList.remove('hidden');
+  }
+};
+
+var closeElement = function (element) {
+  if (element) {
+    element.classList.add('hidden');
+  }
+};
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closeElement(userDialog);
   }
 };
 
@@ -83,9 +101,51 @@ var addWizardElements = function (wizardsArr) {
   return {};
 };
 
-showElement(userDialog);
+userDialogOpen.addEventListener('click', function () {
+  showElement(userDialog);
+  document.addEventListener('keydown', onPopupEscPress);
+});
+
+userDialogOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    showElement(userDialog);
+    document.addEventListener('keydown', onPopupEscPress);
+  }
+});
+
+userNameInput.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+userNameInput.addEventListener('blur', function () {
+  document.addEventListener('keydown', onPopupEscPress);
+});
+
+userNameInput.addEventListener('invalid', function () {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
 
 wizards = generateWizardsArray(FULL_NAMES, COAT_COLORS, EYES_COLORS, WIZARDS_COUNT);
 similarListElement.appendChild(addWizardElements(wizards));
 
 showElement(userDialog.querySelector('.setup-similar'));
+
+userDialogClose.addEventListener('click', function () {
+  closeElement(userDialog);
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+userDialogClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeElement(userDialog);
+    document.removeEventListener('keydown', onPopupEscPress);
+  }
+});

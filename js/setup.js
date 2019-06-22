@@ -8,12 +8,16 @@ var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var FULL_NAMES = [NAMES, SURNAMES];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var userDialog = document.querySelector('.setup');
 var userDialogOpen = document.querySelector('.setup-open');
 var userDialogClose = userDialog.querySelector('.setup-close');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var userNameInput = userDialog.querySelector('.setup-user-name');
+var wizardsCoat = userDialog.querySelector('.wizard-coat');
+var wizardsEyes = userDialog.querySelector('.wizard-eyes');
+var wizardsFireball = userDialog.querySelector('.setup-fireball-wrap');
 var wizards = [];
 
 
@@ -41,6 +45,27 @@ var getRandomValue = function (arr) {
   }
 
   return 0;
+};
+
+var changeCoatColor = function (element) {
+  var color = getRandomValue(COAT_COLORS);
+
+  element.querySelector('.wizard-coat').style.fill = color;
+  element.querySelector('input[name="coat-color"]').value = color;
+};
+
+var changeEyesColor = function (element) {
+  var color = getRandomValue(EYES_COLORS);
+
+  element.querySelector('.wizard-eyes').style.fill = color;
+  element.querySelector('input[name="eyes-color"]').value = color;
+};
+
+var changeFireballColor = function (element) {
+  var color = getRandomValue(FIREBALL_COLORS);
+
+  element.querySelector('.setup-fireball-wrap').style.backgroundColor = color;
+  element.querySelector('input[name="fireball-color"]').value = color;
 };
 
 var getRandomName = function (fullNames) {
@@ -101,6 +126,7 @@ var addWizardElements = function (wizardsArr) {
   return {};
 };
 
+
 userDialogOpen.addEventListener('click', function () {
   showElement(userDialog);
   document.addEventListener('keydown', onPopupEscPress);
@@ -131,6 +157,18 @@ userNameInput.addEventListener('invalid', function () {
   } else {
     userNameInput.setCustomValidity('');
   }
+});
+
+wizardsCoat.addEventListener('click', function () {
+  changeCoatColor(userDialog);
+});
+
+wizardsEyes.addEventListener('click', function () {
+  changeEyesColor(userDialog);
+});
+
+wizardsFireball.addEventListener('click', function () {
+  changeFireballColor(userDialog);
 });
 
 wizards = generateWizardsArray(FULL_NAMES, COAT_COLORS, EYES_COLORS, WIZARDS_COUNT);

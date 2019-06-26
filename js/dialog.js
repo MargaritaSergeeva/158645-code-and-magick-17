@@ -71,7 +71,6 @@ var changeFireballColor = function (element) {
 
 userDialogOpen.addEventListener('click', function () {
   showElement(userDialog);
-
   document.addEventListener('keydown', onPopupEscPress);
 });
 

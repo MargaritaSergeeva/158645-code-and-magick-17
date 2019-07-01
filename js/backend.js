@@ -5,7 +5,7 @@
   var MAX_TIMEOUT = 10000;
 
   window.backend = {
-    load: function (onLoad, onError, url) {
+    load: function (url, onLoad, onError) {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 
@@ -31,7 +31,7 @@
       xhr.send();
     },
 
-    save: function (data, onLoad, onError, url) {
+    save: function (url, data, onLoad, onError) {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 

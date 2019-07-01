@@ -13,6 +13,6 @@
 
   wizardsForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(wizardsForm), closeUserDialog, window.utils.onError, window.constants.URL_POST);
+    window.backend.save(window.constants.URL_POST, new FormData(wizardsForm), closeUserDialog, window.utils.onError);
   });
 })();

@@ -16,14 +16,14 @@
 
   userDialogOpen.addEventListener('click', function () {
     window.utils.showElement(window.variables.userDialog);
-    window.backend.load(window.wizards.addWizardElements, window.utils.onError, window.constants.URL_GET);
+    window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
     document.addEventListener('keydown', onPopupEscPress);
   });
 
   userDialogOpen.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.constants.ENTER_KEYCODE) {
       window.utils.showElement(window.variables.userDialog);
-      window.backend.load(window.wizards.addWizardElements, window.utils.onError, window.constants.URL_GET);
+      window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
       document.addEventListener('keydown', onPopupEscPress);
     }
   });

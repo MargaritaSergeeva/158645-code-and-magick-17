@@ -2,6 +2,7 @@
 
 (function () {
   var SUCСESS__STATUS = 200;
+  var MAX_TIMEOUT = 10000;
 
   window.backend = {
     load: function (onLoad, onError, url) {
@@ -24,7 +25,7 @@
         onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
       });
 
-      xhr.timeout = 10000;
+      xhr.timeout = MAX_TIMEOUT;
 
       xhr.open('GET', url);
       xhr.send();
@@ -50,7 +51,7 @@
         onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
       });
 
-      xhr.timeout = 10000;
+      xhr.timeout = MAX_TIMEOUT;
 
       xhr.open('POST', url);
       xhr.send(data);

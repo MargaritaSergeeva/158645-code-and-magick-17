@@ -10,17 +10,20 @@
     if (evt.keyCode === window.constants.ESC_KEYCODE) {
       window.utils.closeElement(window.variables.userDialog);
       window.utils.resetBlockPosition(window.variables.userDialog);
+      window.wizards.removeWizardElements();
     }
   };
 
   userDialogOpen.addEventListener('click', function () {
     window.utils.showElement(window.variables.userDialog);
+    window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
     document.addEventListener('keydown', onPopupEscPress);
   });
 
   userDialogOpen.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.constants.ENTER_KEYCODE) {
       window.utils.showElement(window.variables.userDialog);
+      window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
       document.addEventListener('keydown', onPopupEscPress);
     }
   });
@@ -83,6 +86,7 @@
   userDialogClose.addEventListener('click', function () {
     window.utils.closeElement(window.variables.userDialog);
     window.utils.resetBlockPosition(window.variables.userDialog);
+    window.wizards.removeWizardElements();
     document.removeEventListener('keydown', onPopupEscPress);
   });
 
@@ -90,6 +94,7 @@
     if (evt.keyCode === window.constants.ENTER_KEYCODE) {
       window.utils.closeElement(window.variables.userDialog);
       window.utils.resetBlockPosition(window.variables.userDialog);
+      window.wizards.removeWizardElements();
       document.removeEventListener('keydown', onPopupEscPress);
     }
   });

@@ -7,7 +7,7 @@
 
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.constants.ESC_KEYCODE) {
+    if (evt.keyCode === window.constants.KeyCode.ESC) {
       window.utils.closeElement(window.variables.userDialog);
       window.utils.resetBlockPosition(window.variables.userDialog);
       window.wizards.removeWizardElements();
@@ -16,14 +16,12 @@
 
   userDialogOpen.addEventListener('click', function () {
     window.utils.showElement(window.variables.userDialog);
-    window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
     document.addEventListener('keydown', onPopupEscPress);
   });
 
   userDialogOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.constants.ENTER_KEYCODE) {
+    if (evt.keyCode === window.constants.KeyCode.ENTER) {
       window.utils.showElement(window.variables.userDialog);
-      window.backend.load(window.constants.URL_GET, window.wizards.addWizardElements, window.utils.onError);
       document.addEventListener('keydown', onPopupEscPress);
     }
   });
@@ -86,15 +84,13 @@
   userDialogClose.addEventListener('click', function () {
     window.utils.closeElement(window.variables.userDialog);
     window.utils.resetBlockPosition(window.variables.userDialog);
-    window.wizards.removeWizardElements();
     document.removeEventListener('keydown', onPopupEscPress);
   });
 
   userDialogClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.constants.ENTER_KEYCODE) {
+    if (evt.keyCode === window.constants.KeyCode.ENTER) {
       window.utils.closeElement(window.variables.userDialog);
       window.utils.resetBlockPosition(window.variables.userDialog);
-      window.wizards.removeWizardElements();
       document.removeEventListener('keydown', onPopupEscPress);
     }
   });

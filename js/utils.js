@@ -45,6 +45,12 @@
       node.classList.add('error-massage');
       node.textContent = errorMessage;
       document.body.insertAdjacentElement('afterbegin', node);
+    },
+
+    getWizardsArray: function (wizardsArr) {
+      var wizards = [];
+      wizards = wizardsArr;
+      return wizards;
     }
   };
 })();

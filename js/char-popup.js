@@ -10,7 +10,6 @@
     if (evt.keyCode === window.constants.KeyCode.ESC) {
       window.utils.closeElement(window.variables.userDialog);
       window.utils.resetBlockPosition(window.variables.userDialog);
-      window.wizards.removeWizardElements();
     }
   };
 

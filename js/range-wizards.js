@@ -28,9 +28,11 @@
     updateWizards: function (wizardsArr) {
       var newWisardsArray = wizardsArr.slice().sort(function (left, right) {
         var rankDiff = getRank(right) - getRank(left);
+
         if (rankDiff === 0) {
           rankDiff = namesComparator(left.name, right.name);
         }
+
         return rankDiff;
       });
 

@@ -30,11 +30,11 @@
     getMaxElement: function (arr) {
       var maxElement = arr[0];
 
-      for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > maxElement) {
-          maxElement = arr[i];
+      arr.forEach(function (it) {
+        if (it > maxElement) {
+          maxElement = it;
         }
-      }
+      });
 
       return maxElement;
     },
@@ -45,12 +45,6 @@
       node.classList.add('error-massage');
       node.textContent = errorMessage;
       document.body.insertAdjacentElement('afterbegin', node);
-    },
-
-    getWizardsArray: function (wizardsArr) {
-      var wizards = [];
-      wizards = wizardsArr;
-      return wizards;
     }
   };
 })();

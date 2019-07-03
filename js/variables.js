@@ -6,6 +6,8 @@
 
   window.variables = {
     userDialog: userDialog,
-    userNameInput: userNameInput
+    userNameInput: userNameInput,
+    coatColor: 'rgb(101, 137, 164)',
+    eyesColor: 'black'
   };
 })();

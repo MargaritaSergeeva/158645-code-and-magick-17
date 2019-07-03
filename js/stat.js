@@ -38,10 +38,10 @@
     ctx.textBaseline = 'hanging';
     ctx.textAlign = 'center';
 
-    for (var i = 0; i < arr.length; i++) {
-      ctx.fillText(arr[i], x, y);
+    arr.forEach(function (it) {
+      ctx.fillText(it, x, y);
       y += 18;
-    }
+    });
   };
 
   var renderColumn = function (ctx, name, time, x, y, barHeight) {
@@ -62,11 +62,11 @@
     var strings = ['Ура вы победили!', 'Список результатов:'];
     renderText(ctx, strings, 300, 32);
 
-    for (var i = 0; i < names.length; i++) {
+    names.forEach(function (it, i) {
       var barHeight = times[i] * BAR_MAX_HEIGHT / window.utils.getMaxElement(times);
       var barLocationX = 100 + (BAR_WIDTH + GAP) * i;
 
-      renderColumn(ctx, names[i], times[i], barLocationX, 10, barHeight);
-    }
+      renderColumn(ctx, it, times[i], barLocationX, 10, barHeight);
+    });
   };
 })();

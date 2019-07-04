@@ -7,7 +7,6 @@
   var closeUserDialog = function (success) {
     if (success) {
       window.utils.closeElement(window.variables.userDialog);
-      window.wizards.removeWizardElements();
     }
   };
 
